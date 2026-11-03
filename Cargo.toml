@@ -1,0 +1,18 @@
+[package]
+name = "tex_to_image"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "tex-to-image"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+ratex-layout = "0.1.15"
+ratex-parser = "0.1.15"
+ratex-render = { version = "0.1.15", features = ["embed-fonts"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
