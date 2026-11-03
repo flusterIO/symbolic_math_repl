@@ -1,4 +1,4 @@
-# Tex-To-Image
+# Ghostty-PtPython Symbolic Math Renderer
 
 This is a dead simple latex to katex to image script that is mostly used as part of a personal workflow that allows me to reliably work with symbolic math in the terminal. I never bothered to create a decent installation workflow, as this is really just something I built for myself, so the installation process is a little clunky. You only have to do everything once though.
 
