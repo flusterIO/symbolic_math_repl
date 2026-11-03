@@ -29,3 +29,54 @@ You can then set two properties through environment variables:
 Where both accept "1", "true", "yes" or "on"... or the opposite of course.
 
 This package depends on [icat](https://github.com/Kabilan108/ipython-icat), so if your python installation doesn't automatically install the dependencies in your extensions folder, you'll have to run `pip install python-icat` from within your intended python environment.
+
+---
+
+As a bonus, if you want to you can render images like this:
+
+```python
+from enum import Enum
+from typing import Self
+from IPython.core.getipython import get_ipython
+from PIL import Image
+import pyperclip as pc
+
+
+class Images(Enum):
+    CristoffelDiagram = "cristoffel-diagram"
+    FiveDimensionalGeometry = "5d-geometry-diagram"
+    EquitemporalPlaneGeometry = "equitemporal-plane-geometry"
+    CovariantDerivativeVsCristoffel = "covariant-derivative-vs-cristoffel"
+
+    def to_path(self):
+        if self == Images.CristoffelDiagram:
+            return "/Users/bigsexy/Desktop/swift/Fluster/apps/website/public/assets/diagrams/ai_generated/cristoffel_symbols.png"
+        if self == Images.FiveDimensionalGeometry:
+            return "/Users/bigsexy/Desktop/swift/Fluster/apps/website/public/assets/diagrams/ai_generated/5dGeometry.png"
+        if self == Images.EquitemporalPlaneGeometry:
+            return "/Users/bigsexy/Desktop/swift/Fluster/apps/website/public/assets/diagrams/ai_generated/equi_temporal_plane_geometry.png"
+        if self == Images.CovariantDerivativeVsCristoffel:
+            return "/Users/bigsexy/Desktop/swift/Fluster/apps/website/public/assets/diagrams/ai_generated/covariant_derivative_and_the_cristoffel_symbol.png"
+        return "Invalid Path"
+
+    def copy_path(self):
+        pc.copy(self.to_path())
+
+
+def renderImage(img: Images, open=False):
+    p = img.to_path()
+    ipy = get_ipython()
+    if ipy is not None:
+        ipy.run_line_magic("icat", p)
+    if open:
+        img = Image.open(p)  # pyright: ignore
+        img.show()  # pyright: ignore
+```
+
+Of course using an enum is a design decision. Use a string if that fits your workflow better. This is really just calling the icat magick programmatically, but I found this much easier to work with in the terminal.
+
+Then just call it in one of your notebook cells:
+
+```python
+renderImage(Images.CristoffelDiagram)
+```
