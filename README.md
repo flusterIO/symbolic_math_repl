@@ -14,12 +14,12 @@ To get the setup above, follow the following steps:
 6. Install [ptPython](https://github.com/prompt-toolkit/ptpython). This is an amazing ipython wrapper that renders the images in Ghostty flawlessly.
 7. This step is optional, but if you don't do it you'll have to run it every time you open the terminal: In `$HOME/.ipython/profile_default/ipython_config.py`, add the following line (modify it if the `c.InteractiveShellApp.exec_lines` is already set)
 
-```
+```python
 
 c.InteractiveShellApp.exec_lines = [
     "%load_ext icat",
     "%load_ext mathcat",
-    ]
+]
 ```
 
 You can then set two properties through environment variables:
